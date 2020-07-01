@@ -1,0 +1,107 @@
+game.htm
+
+Type
+HTML
+Size
+3 KB (2,712 bytes)
+Storage used
+3 KB (2,712 bytes)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Guess the number</title>
+	<style>
+		.div1{
+			margin-left:200px;
+		}
+		.gamecont{
+			margin-top: 100px;
+			margin-left: 655px;
+			display: flex;
+			flex-direction: row;
+		}
+		.gamesubmit{
+			margin-left: 100px;
+			display: flex;
+			flex-direction: column;
+
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		var idx=Math.floor(Math.random() * (100) + 1);
+		var g_x=0;
+		var g_y=0;
+
+		function gamescript(){
+			var x=parseInt(document.getElementById("number").value);
+			if(x<idx)return 1;
+			else if(idx<x)return 2;
+			return 3; 
+		}
+
+		function gamecode(){
+			var x=gamescript();
+			document.getElementById("output").value=x.toString();
+		    var y=parseInt(document.getElementById("tries").value);
+		    y=y-1;
+		    document.getElementById("tries").value=y.toString();
+			g_x=x;
+			g_y=y;
+		}
+
+		function check(){
+			if(g_x==3){
+				if(!alert("You have won the game")){
+					window.location.reload();
+				}
+			}
+			if(g_x!=3 && g_y==0){
+		    	if(!alert("You have lost the game")){
+		    		window.location.reload();
+		    	}
+		    }
+            
+		}
+	</script>
+	<div>
+		<h1 style="text-align: center;">Guess the number?</h1>
+	</div>
+	<div class="div1">
+		<h2>Rules</h2>
+		<ol>
+			<li style="margin-top:30px">The number can be between 1-100</li>
+			<li style="margin-top:30px">You have 7 tries to guess the number</li>
+			<li style="margin-top:30px">Each time you guess the number, the emulator answers with 2 choices</li>
+			<div style="margin-left: 30px;margin-top:30px">
+				<p><b>1:</b> If the choosen number is less than the number to be guessed</p>
+				<p><b>2:</b> If the choosen number is greater than the number to be guessed</p>
+			</div>
+			<li style="margin-top: 30px">A window will appear displaying "You have lost the game" if the number of tries exceeds 7</li>
+			<li style="margin-top: 30px">A window will appear displaying "You have won the game" if you have gussed the number correctly</li>
+		</ol>
+
+	</div>
+
+	<div class="gamecont">
+		<label for="tries">Tries left:</label>
+		<input style="margin-left:5px;" type="text" id="tries" name="Tries left" value="7" readonly>
+		<div class="gamesubmit">
+			<div>
+				<label for="number">Guess:</label>
+			    <input style="margin-left: 5px" type="text" id="number" name="Number" value="0">
+			</div>
+			<button type="button" style="margin-top: 20px;" onclick="gamecode();check()">Submit</button>
+		</div>
+	</div>
+
+	<div style="text-align: center;margin-top: 100px" >
+			<label for="output">Output:</label>
+		    <input style="margin-left:5px;" type="text" id="output" name="Output" value="0" readonly> 
+	</div>
+
+</body>
+</html>
+
